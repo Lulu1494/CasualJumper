@@ -11,9 +11,9 @@ package casualjumper;
  */
 public class ChaseCamera extends Camera {
 
-    @Override
-    public void update() {
-	setPosition(CasualJumper.player.getPosition());
-    }
+	@Override
+	public void update() {
+		setPosition(CasualJumper.player.getPosition());
+	}
 
 }
