@@ -23,25 +23,30 @@ public class Rectangle {
 		centerY = bottom + halfHeight;
 	}
 
+	@Override
+	public String toString() {
+		return "Rectangle[" + left + ", " + bottom + " -> " + right + ", " + top + "]";
+	}
+
 	public Vector2 getCenter() {
 		return new Vector2(centerX, centerY);
 	}
 
-	public Rectangle translate(double tx, double ty) {
-		return new Rectangle(left + tx, bottom + ty, right + tx, top + ty);
+	public Rectangle translate(Vector2 t) {
+		return new Rectangle(left + t.x, bottom + t.y, right + t.x, top + t.y);
 	}
 
-	public boolean containsPoint(double x, double y) {
-		return x >= left
-				&& x <= right
-				&& y >= bottom
-				&& y <= top;
+	public boolean containsPoint(Vector2 point) {
+		return point.x >= left
+				&& point.x <= right
+				&& point.y >= bottom
+				&& point.y <= top;
 	}
 
 	public boolean intersects(Rectangle other) {
-		return right >= other.left
-				&& left <= other.right
-				&& top >= other.bottom
-				&& bottom <= other.top;
+		return right > other.left
+				&& left < other.right
+				&& top > other.bottom
+				&& bottom < other.top;
 	}
 }

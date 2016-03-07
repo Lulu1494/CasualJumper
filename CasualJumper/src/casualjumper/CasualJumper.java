@@ -6,6 +6,8 @@ import java.util.Set;
 
 public class CasualJumper {
 
+	public static int tickLag = 17;
+
 	public static Color backgroundColor = Color.WHITE;
 
 	public static final Set<Entity> ENTITIES = new HashSet<>();
@@ -54,16 +56,36 @@ public class CasualJumper {
 	}
 
 	public static void initializeWorld() {
-		mainCamera = new ChaseCamera();
-		mainCamera.setBounds(new Rectangle(0, 0, 1280, 720));
-		addEntity(mainCamera);
-
 		player = new Player();
+		player.setBounds(new Rectangle(16, 24));
+		player.setName("Player");
 		addEntity(player);
 
+		mainCamera = new ChaseCamera(player);
+		mainCamera.setBounds(new Rectangle(1280, 720));
+		mainCamera.setName("Main Camera");
+		addEntity(mainCamera);
+
 		Box box = new Box(Color.RED, new Rectangle(32, 32));
-		box.setPosition(64, 0);
+		box.position = new Vector2(31, 0);
+		box.setName("Box");
 		addEntity(box);
+
+		Box floor = new Box(Color.GREEN, new Rectangle(256, 32));
+		floor.position = new Vector2(-100, -32);
+		floor.setName("Floor");
+		addEntity(floor);
+
+		for (int x = 0; x < 20; x++) {
+			for (int y = 0; y < 20; y++) {
+				if (Math.random() < .3) {
+					Box tile = new Box(Color.orange, new Rectangle(32, 32));
+					tile.position = new Vector2(32 * (x - 5 - 2), 32 * (-y - 5));
+					tile.setName("Tile " + x + ", " + y);
+					addEntity(tile);
+				}
+			}
+		}
 	}
 
 	public static class Box extends MapEntity {
@@ -78,11 +100,10 @@ public class CasualJumper {
 		@Override
 		public void draw(Camera camera) {
 			StdDraw.setPenColor(color);
-			StdDraw.filledRectangle(
-					camera.worldToScreenX(getPositionX()),
-					camera.worldToScreenY(getPositionY()),
-					getBounds().halfWidth,
-					getBounds().halfHeight);
+			Vector2 screenPoint = camera.worldToScreen(position);
+			Rectangle bounds = getBounds();
+			StdDraw.filledRectangle(screenPoint.x + bounds.halfWidth, screenPoint.y + bounds.halfHeight,
+					bounds.halfWidth, bounds.halfHeight);
 		}
 	}
 
@@ -108,7 +129,7 @@ public class CasualJumper {
 			MAP_ENTITIES.removeIf(e -> !e.isEnabled());
 			PHYSICS_ENTITIES.removeIf(e -> !e.isEnabled());
 
-			StdDraw.show(17);
+			StdDraw.show(tickLag);
 		}
 	}
 

@@ -23,6 +23,11 @@ public class Vector2 {
 		return new Vector2(magnitude * Math.cos(angle), magnitude * Math.sin(angle));
 	}
 
+	@Override
+	public String toString() {
+		return "(" + x + ", " + y + ")";
+	}
+
 	public Vector2 add(Vector2 other) {
 		return new Vector2(x + other.x, y + other.y);
 	}

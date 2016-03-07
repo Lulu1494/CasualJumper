@@ -10,10 +10,18 @@ package casualjumper;
  * @author Davidson
  */
 public class ChaseCamera extends Camera {
+	
+	private MapEntity target;
 
+	public ChaseCamera(MapEntity target) {
+		this.target = target;
+	}
+	
 	@Override
 	public void update() {
-		setPosition(CasualJumper.player.getPosition());
+		if(target != null) {
+			position = target.position;
+		}
 	}
 
 }

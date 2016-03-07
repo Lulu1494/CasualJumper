@@ -8,7 +8,8 @@ public class Input {
 
 	public static int RIGHT = KeyEvent.VK_RIGHT,
 			LEFT = KeyEvent.VK_LEFT,
-			JUMP = KeyEvent.VK_Z;
+			JUMP = KeyEvent.VK_Z,
+			RESET = KeyEvent.VK_R;
 
 	private final static Set<Integer> KEYS_DOWN = new HashSet<>();
 
