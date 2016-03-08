@@ -1,4 +1,7 @@
-package casualjumper;
+package platformer;
+
+import math.Rectangle;
+import math.Vector2;
 
 public class Physics {
 

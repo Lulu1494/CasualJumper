@@ -1,4 +1,9 @@
-package casualjumper;
+package engine;
+
+import math.Rectangle;
+import math.Vector2;
+import engine.StdDraw;
+import engine.MapEntity;
 
 public class Camera extends MapEntity {
 

@@ -3,7 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package casualjumper;
+package engine;
+
+import engine.Camera;
+import math.Rectangle;
+import math.Vector2;
+import engine.MapEntity;
 
 /**
  *

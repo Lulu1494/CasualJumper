@@ -1,5 +1,11 @@
-package casualjumper;
+package platformer;
 
+import engine.Camera;
+import math.Rectangle;
+import math.Vector2;
+import engine.StdDraw;
+import engine.PhysicsEntity;
+import engine.CasualJumper;
 import java.awt.Color;
 
 public class Player extends PhysicsEntity {

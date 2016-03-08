@@ -1,4 +1,4 @@
-package casualjumper;
+package math;
 
 public class GameMath {
 

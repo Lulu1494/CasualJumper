@@ -1,4 +1,10 @@
-package casualjumper;
+package engine;
+
+import engine.MapEntity;
+import engine.CasualJumper;
+import platformer.Physics;
+import math.Rectangle;
+import math.Vector2;
 
 public abstract class PhysicsEntity extends MapEntity {
 

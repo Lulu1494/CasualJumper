@@ -1,4 +1,6 @@
-package casualjumper;
+package math;
+
+import math.Vector2;
 
 public class Rectangle {
 

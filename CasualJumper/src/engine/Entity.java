@@ -1,4 +1,4 @@
-package casualjumper;
+package engine;
 
 public abstract class Entity {
 

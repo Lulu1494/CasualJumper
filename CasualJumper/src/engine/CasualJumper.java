@@ -1,8 +1,11 @@
-package casualjumper;
+package engine;
 
 import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
+import platformer.Player;
+import math.Rectangle;
+import math.Vector2;
 
 public class CasualJumper {
 

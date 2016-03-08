@@ -1,4 +1,8 @@
-package casualjumper;
+package engine;
+
+import engine.Entity;
+import math.Rectangle;
+import math.Vector2;
 
 public abstract class MapEntity extends Entity {
 
