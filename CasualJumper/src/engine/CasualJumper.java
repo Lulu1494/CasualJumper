@@ -14,8 +14,6 @@ public class CasualJumper {
 	public static Color backgroundColor = Color.WHITE;
 
 	public static final Set<Entity> ENTITIES = new HashSet<>();
-	public static final Set<MapEntity> MAP_ENTITIES = new HashSet<>();
-	public static final Set<PhysicsEntity> PHYSICS_ENTITIES = new HashSet<>();
 
 	public static Camera mainCamera;
 	public static Player player;
@@ -25,30 +23,9 @@ public class CasualJumper {
 		e.enable();
 		return ENTITIES.add(e);
 	}
-
-	public static boolean addEntity(MapEntity m) {
-		m.enable();
-		return MAP_ENTITIES.add(m);
-	}
-
-	public static boolean addEntity(PhysicsEntity p) {
-		p.enable();
-		return PHYSICS_ENTITIES.add(p);
-	}
-
 	public static boolean removeEntity(Entity e) {
 		e.disable();
 		return ENTITIES.remove(e);
-	}
-
-	public static boolean removeEntity(MapEntity m) {
-		m.disable();
-		return MAP_ENTITIES.remove(m);
-	}
-
-	public static boolean removeEntity(PhysicsEntity p) {
-		p.disable();
-		return PHYSICS_ENTITIES.remove(p);
 	}
 
 	/**
@@ -85,13 +62,18 @@ public class CasualJumper {
 		}
 	}
 
-	public static class Box extends MapEntity {
+	public static class Box extends Entity {
 
 		public Color color;
 
 		public Box(Color color, Rectangle bounds) {
 			this.color = color;
 			setBounds(bounds);
+		}
+
+		@Override
+		public double getGravityScale() {
+			return 0;
 		}
 
 		@Override
@@ -110,26 +92,11 @@ public class CasualJumper {
 		running = true;
 		while (running) {
 			StdDraw.clear(backgroundColor);
-
-			PHYSICS_ENTITIES.stream().filter(Entity::isEnabled).forEach(PhysicsEntity::physicsUpdate);
-
-			Set<Entity> updatedEntities = new HashSet<>(ENTITIES);
-			updatedEntities.addAll(MAP_ENTITIES);
-			updatedEntities.addAll(PHYSICS_ENTITIES);
-			updatedEntities.stream().filter(Entity::isEnabled).forEach(Entity::update);
-
-			Set<MapEntity> drawnEntities = new HashSet<>(MAP_ENTITIES);
-			Rectangle cameraBounds = mainCamera.getBounds();
-			drawnEntities.addAll(PHYSICS_ENTITIES);
-			drawnEntities.stream().filter(m
-					-> m.isEnabled()
-					&& cameraBounds.intersects(m.getBounds()))
-					.forEach(m -> m.draw(mainCamera));
-
 			ENTITIES.removeIf(e -> !e.isEnabled());
-			MAP_ENTITIES.removeIf(e -> !e.isEnabled());
-			PHYSICS_ENTITIES.removeIf(e -> !e.isEnabled());
-
+			ENTITIES.stream().forEach((Entity e) -> e.update());
+			ENTITIES.stream().forEach((Entity e) -> e.physicsUpdate());
+			ENTITIES.stream().forEach((Entity e) -> e.lateUpdate());
+			ENTITIES.stream().forEach((Entity e) -> e.draw(mainCamera));
 			StdDraw.show(tickLag);
 		}
 	}
