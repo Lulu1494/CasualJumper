@@ -5,7 +5,7 @@ public class Physics {
 	// base vector added to all physics entities every physics update
 	public static Vector2 gravity = new Vector2(0, -.25);
 
-	// gets a vector that the mover should move to get out of the obstacle
+	// gets the smallest vector that the mover should move to get out of the obstacle
 	public static Vector2 collisionSolution(Rectangle mover, Rectangle obstacle) {
 		if (!mover.intersects(obstacle)) {
 //			System.out.println("not intersecting");
@@ -14,7 +14,7 @@ public class Physics {
 
 		// vector from the mover's center to the obstacle's center
 		Vector2 toObstacle = obstacle.getCenter().subtract(mover.getCenter());
-		double moveX = 0, moveY = 0;
+		double moveX, moveY;
 
 		// obstacle is to the right of mover
 		if (toObstacle.x > 0) {
@@ -50,6 +50,7 @@ public class Physics {
 				moveY = 0;
 			}
 		}
+
 		return new Vector2(moveX, moveY);
 	}
 }

@@ -4,48 +4,91 @@ import java.awt.Color;
 
 public class Player extends PhysicsEntity {
 
-	private final double jumpSpeed = 6;
+	private boolean resetting;
+
 	private final double moveSpeed = 3;
+	private int moveDirection;
+
+	private boolean jumping;
+	private final double jumpSustainSpeed = .08;
+	private final double jumpStartSpeed = 3;
+	private boolean jumpSustain;
+	private long jumpEndTime;
+	private final long jumpDuration = 200;
+
+	private boolean canJump() {
+		return !canMove(Vector2.DOWN);
+	}
 
 	@Override
 	public double getGravityScale() {
-		return 1;
+		return jumping ? 0 : 1;
 	}
 
 	@Override
 	public void update() {
-		double newVelocityX = moveSpeed * Input.getAxis(Input.RIGHT, Input.LEFT);
-		double newVelocityY = velocity.y;
-		
-		if(Input.isKeyPressed(Input.RESET)) {
-			position = Vector2.ZERO;
-		}
+		resetting = Input.isKeyPressed(Input.RESET);
+		moveDirection = Input.getAxis(Input.RIGHT, Input.LEFT);
 
-		if (!canMove(Vector2.DOWN)) {
-			if (Input.isKeyDown(Input.JUMP)) {
-				newVelocityY = jumpSpeed;
+		if (Input.isKeyPressed(Input.JUMP) && canJump()) {
+			jumping = true;
+			jumpSustain = true;
+			jumpEndTime = jumpDuration + System.currentTimeMillis();
+			velocity = new Vector2(velocity.x, jumpStartSpeed);
+		}
+		if (jumping) {
+			jumpSustain = System.currentTimeMillis() < jumpEndTime;
+			if (!Input.isKeyDown(Input.JUMP) || !jumpSustain) {
+				jumping = false;
 			}
+		}
+		if(position.y < -1000) position = new Vector2(position.x, position.y + 2000);
+	}
+
+	public void reset() {
+		position = new Vector2(0, 500);
+//		velocity = Vector2.ZERO;
+	}
+
+	@Override
+	public void physicsUpdate() {
+		if (resetting) {
+			reset();
+
 		} else {
-			newVelocityY = velocity.y;
+			double vx, vy;
+
+			vx = moveSpeed * moveDirection;
+
+			if (jumping) {
+				vy = velocity.y + getJumpSpeed();
+			} else {
+				vy = velocity.y;
+			}
+
+			if (vx != 0 && !canMove(new Vector2(Math.signum(vx), 0))) {
+				vx = 0;
+			}
+			if (vy != 0 && !canMove(new Vector2(0, Math.signum(vy)))) {
+				vy = 0;
+			}
+
+			if (velocity.x != vx || velocity.y != vy) {
+				velocity = new Vector2(vx, vy);
+			}
+		}
+		super.physicsUpdate();
+		if (isDense()) {
+			CasualJumper.MAP_ENTITIES.stream()
+					.filter(obstacle -> !this.equals(obstacle) && obstacle.isDense())
+					.forEach(obstacle -> {
+						Vector2 collisionSolution = Physics.collisionSolution(getBounds(), obstacle.getBounds());
+						if (!collisionSolution.isZero()) {
+							translate(collisionSolution);
+						}
+					});
 		}
 
-		if (newVelocityX != 0 && !canMove(new Vector2(Math.signum(newVelocityX), 0))) {
-			newVelocityX = 0;
-		}
-		if (newVelocityY != 0 && !canMove(new Vector2(0, Math.signum(newVelocityY)))) {
-			newVelocityY = 0;
-		}
-
-		velocity = new Vector2(newVelocityX, newVelocityY);
-
-		CasualJumper.MAP_ENTITIES.stream()
-				.filter(obstacle -> !this.equals(obstacle) && obstacle.isDense())
-				.forEach(obstacle -> {
-					Vector2 collisionSolution = Physics.collisionSolution(getBounds(), obstacle.getBounds());
-					if (!collisionSolution.isZero()) {
-						translate(collisionSolution);
-					}
-				});
 	}
 
 	@Override
@@ -55,6 +98,10 @@ public class Player extends PhysicsEntity {
 		Rectangle bounds = getBounds();
 		StdDraw.filledRectangle(screenPoint.x + bounds.halfWidth, screenPoint.y + bounds.halfHeight,
 				bounds.halfWidth, bounds.halfHeight);
+	}
+
+	private double getJumpSpeed() {
+		return jumpSustainSpeed;
 	}
 
 }

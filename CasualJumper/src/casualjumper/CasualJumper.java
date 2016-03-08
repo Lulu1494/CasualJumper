@@ -57,8 +57,9 @@ public class CasualJumper {
 
 	public static void initializeWorld() {
 		player = new Player();
-		player.setBounds(new Rectangle(16, 24));
+		player.setBounds(new Rectangle(16, 16));
 		player.setName("Player");
+		player.reset();
 		addEntity(player);
 
 		mainCamera = new ChaseCamera(player);
@@ -66,23 +67,16 @@ public class CasualJumper {
 		mainCamera.setName("Main Camera");
 		addEntity(mainCamera);
 
-		Box box = new Box(Color.RED, new Rectangle(32, 32));
-		box.position = new Vector2(31, 0);
-		box.setName("Box");
-		addEntity(box);
-
-		Box floor = new Box(Color.GREEN, new Rectangle(256, 32));
-		floor.position = new Vector2(-100, -32);
-		floor.setName("Floor");
-		addEntity(floor);
-
-		for (int x = 0; x < 20; x++) {
-			for (int y = 0; y < 20; y++) {
-				if (Math.random() < .3) {
-					Box tile = new Box(Color.orange, new Rectangle(32, 32));
-					tile.position = new Vector2(32 * (x - 5 - 2), 32 * (-y - 5));
-					tile.setName("Tile " + x + ", " + y);
-					addEntity(tile);
+		int gridWidth = 100, gridHeight = 25;
+		for (int x = 0; x < gridWidth; x++) {
+			if (x != gridWidth / 2) {
+				for (int y = 0; y < gridHeight; y++) {
+					if (Math.random() <= .3) {
+						Box tile = new Box(Color.orange, new Rectangle(32, 32));
+						tile.position = new Vector2(32 * (x - gridWidth / 2), 32 * (y - gridHeight / 2));
+						tile.setName("Tile " + x + ", " + y);
+						addEntity(tile);
+					}
 				}
 			}
 		}
@@ -122,8 +116,12 @@ public class CasualJumper {
 			updatedEntities.stream().filter(Entity::isEnabled).forEach(Entity::update);
 
 			Set<MapEntity> drawnEntities = new HashSet<>(MAP_ENTITIES);
+			Rectangle cameraBounds = mainCamera.getBounds();
 			drawnEntities.addAll(PHYSICS_ENTITIES);
-			drawnEntities.stream().filter(MapEntity::isEnabled).forEach(m -> m.draw(mainCamera));
+			drawnEntities.stream().filter(m
+					-> m.isEnabled()
+					&& cameraBounds.intersects(m.getBounds()))
+					.forEach(m -> m.draw(mainCamera));
 
 			ENTITIES.removeIf(e -> !e.isEnabled());
 			MAP_ENTITIES.removeIf(e -> !e.isEnabled());

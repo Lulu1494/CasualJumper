@@ -20,7 +20,7 @@ public class Camera extends MapEntity {
 	public Vector2 worldToScreen(Vector2 worldPoint) {
 		final Rectangle bounds = getBounds();
 		return new Vector2(
-				(int) (worldPoint.x - position.x + bounds.halfWidth),
-				(int) (worldPoint.y - position.y + bounds.halfHeight));
+				Math.round(worldPoint.x - position.x),
+				Math.round(worldPoint.y - position.y));
 	}
 }

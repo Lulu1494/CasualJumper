@@ -20,7 +20,8 @@ public class ChaseCamera extends Camera {
 	@Override
 	public void update() {
 		if(target != null) {
-			position = target.position;
+			Rectangle bounds = getBounds();
+			position = target.position.subtract(new Vector2(bounds.halfWidth, bounds.halfHeight));
 		}
 	}
 

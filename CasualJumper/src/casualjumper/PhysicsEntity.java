@@ -25,7 +25,9 @@ public abstract class PhysicsEntity extends MapEntity {
 	 * Called every frame to apply gravity and integrate velocity into position
 	 */
 	public void physicsUpdate() {
+		if (canMove(Vector2.DOWN)) {
+			velocity = velocity.add(Physics.gravity.multiply(getGravityScale()));
+		}
 		translate(velocity);
-		velocity = velocity.add(Physics.gravity.multiply(getGravityScale()));
 	}
 }
