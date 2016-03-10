@@ -4,11 +4,11 @@ import engine.Camera;
 import math.Rectangle;
 import math.Vector2;
 import engine.StdDraw;
-import engine.PhysicsEntity;
 import engine.CasualJumper;
+import engine.Entity;
 import java.awt.Color;
 
-public class Player extends PhysicsEntity {
+public class Player extends Entity {
 
 	private boolean resetting;
 
@@ -16,7 +16,7 @@ public class Player extends PhysicsEntity {
 	private int moveDirection;
 
 	private boolean jumping;
-	private final double jumpSustainSpeed = .08;
+	private final double jumpSustainSpeed = .33;
 	private final double jumpStartSpeed = 3;
 	private boolean jumpSustain;
 	private long jumpEndTime;
@@ -24,11 +24,6 @@ public class Player extends PhysicsEntity {
 
 	private boolean canJump() {
 		return !canMove(Vector2.DOWN);
-	}
-
-	@Override
-	public double getGravityScale() {
-		return jumping ? 0 : 1;
 	}
 
 	@Override
@@ -85,7 +80,7 @@ public class Player extends PhysicsEntity {
 		}
 		super.physicsUpdate();
 		if (isDense()) {
-			CasualJumper.MAP_ENTITIES.stream()
+			CasualJumper.ENTITIES.stream()
 					.filter(obstacle -> !this.equals(obstacle) && obstacle.isDense())
 					.forEach(obstacle -> {
 						Vector2 collisionSolution = Physics.collisionSolution(getBounds(), obstacle.getBounds());

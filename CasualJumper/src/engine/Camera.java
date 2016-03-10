@@ -3,9 +3,9 @@ package engine;
 import math.Rectangle;
 import math.Vector2;
 import engine.StdDraw;
-import engine.MapEntity;
+import engine.Entity;
 
-public class Camera extends MapEntity {
+public class Camera extends Entity {
 
 	@Override
 	public boolean isDense() {
@@ -27,5 +27,10 @@ public class Camera extends MapEntity {
 		return new Vector2(
 				Math.round(worldPoint.x - position.x),
 				Math.round(worldPoint.y - position.y));
+	}
+
+	@Override
+	public double getGravityScale() {
+		return 0;
 	}
 }
