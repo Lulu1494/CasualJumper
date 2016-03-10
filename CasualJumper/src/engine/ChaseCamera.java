@@ -5,10 +5,8 @@
  */
 package engine;
 
-import engine.Camera;
 import math.Rectangle;
 import math.Vector2;
-import engine.MapEntity;
 
 /**
  *
@@ -16,14 +14,22 @@ import engine.MapEntity;
  */
 public class ChaseCamera extends Camera {
 	
-	private MapEntity target;
+	private Entity target;
 
-	public ChaseCamera(MapEntity target) {
+	public ChaseCamera(Entity target) {
+		this.target = target;
+	}
+
+	public Entity getTarget() {
+		return target;
+	}
+	
+	public void setTarget(Entity target) {
 		this.target = target;
 	}
 	
 	@Override
-	public void update() {
+	public void lateUpdate() {
 		if(target != null) {
 			Rectangle bounds = getBounds();
 			position = target.position.subtract(new Vector2(bounds.halfWidth, bounds.halfHeight));
