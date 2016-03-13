@@ -9,7 +9,7 @@ public class GameMath {
 	public static double rand(double a, double b) {
 		return lerp(a, b, Math.random());
 	}
-	
+
 	public static int rand(int a, int b) {
 		return (int) Math.round(rand((double) a, b));
 	}

@@ -13,12 +13,12 @@ public class Player extends Entity {
 	private boolean resetting;
 
 	private final double moveSpeed = 3;
-	private int moveDirection;
+	public int moveDirection;
 
-	private boolean jumping;
+	public boolean jumping;
 	private final double jumpSustainSpeed = .33;
 	private final double jumpStartSpeed = 3;
-	private boolean jumpSustain;
+	public boolean jumpSustain;
 	private long jumpEndTime;
 	private final long jumpDuration = 200;
 
@@ -31,11 +31,8 @@ public class Player extends Entity {
 		resetting = Input.isKeyPressed(Input.RESET);
 		moveDirection = Input.getAxis(Input.RIGHT, Input.LEFT);
 
-		if (Input.isKeyPressed(Input.JUMP) && canJump()) {
-			jumping = true;
-			jumpSustain = true;
-			jumpEndTime = jumpDuration + System.currentTimeMillis();
-			velocity = new Vector2(velocity.x, jumpStartSpeed);
+		if (Input.isKeyPressed(Input.JUMP)) {
+			jump(jumpStartSpeed);
 		}
 		if (jumping) {
 			jumpSustain = System.currentTimeMillis() < jumpEndTime;
@@ -43,12 +40,22 @@ public class Player extends Entity {
 				jumping = false;
 			}
 		}
-		if(position.y < -1000) position = new Vector2(position.x, position.y + 2000);
+		if (position.y < -1000) {
+			position = new Vector2(position.x, position.y + 2000);
+		}
+	}
+
+	public void jump(double speed) {
+		if (canJump()) {
+			jumping = true;
+			jumpSustain = true;
+			jumpEndTime = jumpDuration + System.currentTimeMillis();
+			velocity = new Vector2(velocity.x, speed);
+		}
 	}
 
 	public void reset() {
-		position = new Vector2(0, 500);
-//		velocity = Vector2.ZERO;
+		setPosition(CasualJumper.start.position);
 	}
 
 	@Override

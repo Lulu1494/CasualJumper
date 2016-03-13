@@ -1,7 +1,5 @@
 package math;
 
-import math.Vector2;
-
 public class Rectangle {
 
 	public final double left, bottom, right, top;

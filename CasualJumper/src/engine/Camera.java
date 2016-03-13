@@ -2,14 +2,11 @@ package engine;
 
 import math.Rectangle;
 import math.Vector2;
-import engine.StdDraw;
-import engine.Entity;
 
 public class Camera extends Entity {
 
-	@Override
-	public boolean isDense() {
-		return false;
+	public Camera() {
+		setDense(false);
 	}
 
 	@Override

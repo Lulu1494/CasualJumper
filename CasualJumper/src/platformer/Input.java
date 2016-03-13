@@ -31,7 +31,8 @@ public class Input {
 	/**
 	 *
 	 * @param keyCode the key to check.
-	 * @return true for the first time the key is known to be down since it was last known to be up.
+	 * @return true for the first time the key is known to be down since it was
+	 * last known to be up.
 	 */
 	public static boolean isKeyPressed(int keyCode) {
 		if (!isKeyDown(keyCode)) {

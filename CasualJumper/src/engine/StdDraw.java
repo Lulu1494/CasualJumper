@@ -4,11 +4,18 @@ package engine;
  * ****************************************************************************
  * Compilation: javac StdDraw.java Execution: java StdDraw Dependencies: none
  *
- * Standard drawing library. This class provides a basic capability for creating drawings with your programs. It uses a simple graphics model that allows you to create drawings consisting of points, lines, and curves in a window on your computer and to save the drawings to a file.
+ * Standard drawing library. This class provides a basic capability for creating
+ * drawings with your programs. It uses a simple graphics model that allows you
+ * to create drawings consisting of points, lines, and curves in a window on
+ * your computer and to save the drawings to a file.
  *
- * Todo ---- - Add support for gradient fill, etc. - Fix setCanvasSize() so that it can only be called once. - On some systems, drawing a line (or other shape) that extends way beyond canvas (e.g., to infinity) dimensions does not get drawn.
+ * Todo ---- - Add support for gradient fill, etc. - Fix setCanvasSize() so that
+ * it can only be called once. - On some systems, drawing a line (or other
+ * shape) that extends way beyond canvas (e.g., to infinity) dimensions does not
+ * get drawn.
  *
- * Remarks ------- - don't use AffineTransform for rescaling since it inverts images and strings
+ * Remarks ------- - don't use AffineTransform for rescaling since it inverts
+ * images and strings
  *
  *****************************************************************************
  */
@@ -61,10 +68,17 @@ import javax.swing.JMenuItem;
 import javax.swing.KeyStroke;
 
 /**
- * The {@code StdDraw} class provides a basic capability for creating drawings with your programs. It uses a simple graphics model that allows you to create drawings consisting of points, lines, squares, circles, and other geometric shapes in a window on your computer and to save the drawings to a file. Standard drawing also includes facilities for text, color, pictures, and animation, along with user interaction via the keyboard and mouse.
+ * The {@code StdDraw} class provides a basic capability for creating drawings
+ * with your programs. It uses a simple graphics model that allows you to create
+ * drawings consisting of points, lines, squares, circles, and other geometric
+ * shapes in a window on your computer and to save the drawings to a file.
+ * Standard drawing also includes facilities for text, color, pictures, and
+ * animation, along with user interaction via the keyboard and mouse.
  * <p>
  * <b>Getting started.</b>
- * To use standard drawing, you must have <tt>StdDraw.class</tt> in your Java classpath. If you used our autoinstaller, you should be all set. Otherwise, download
+ * To use standard drawing, you must have <tt>StdDraw.class</tt> in your Java
+ * classpath. If you used our autoinstaller, you should be all set. Otherwise,
+ * download
  * <a href = "http://introcs.cs.princeton.edu/java/stdlib/StdDraw.java">StdDraw.java</a>
  * and put a copy in your working directory.
  * <p>
@@ -79,7 +93,13 @@ import javax.swing.KeyStroke;
  *           StdDraw.line(0.2, 0.2, 0.8, 0.2);
  *       }
  *   }
- * </pre> If you compile and execute the program, you should see a window appear with a thick magenta line and a blue point. This program illustrates the two main types of methods in standard drawing&mdash;methods that draw geometric shapes and methods that control drawing parameters. The methods {@code StdDraw.line()} and {@code StdDraw.point()} draw lines and points; the methods {@code StdDraw.setPenRadius()} and {@code StdDraw.setPenColor()} control the line thickness and color.
+ * </pre> If you compile and execute the program, you should see a window appear
+ * with a thick magenta line and a blue point. This program illustrates the two
+ * main types of methods in standard drawing&mdash;methods that draw geometric
+ * shapes and methods that control drawing parameters. The methods
+ * {@code StdDraw.line()} and {@code StdDraw.point()} draw lines and points; the
+ * methods {@code StdDraw.setPenRadius()} and {@code StdDraw.setPenColor()}
+ * control the line thickness and color.
  * <p>
  * <b>Points and lines.</b>
  * You can draw points and line segments with the following methods:
@@ -88,36 +108,55 @@ import javax.swing.KeyStroke;
  * <li> {@link #line(double x1, double y1, double x2, double y2)}
  * </ul>
  * <p>
- * The <em>x</em>- and <em>y</em>-coordinates must be in the drawing area (between 0 and 1 and by default) or the points and lines will not be visible.
+ * The <em>x</em>- and <em>y</em>-coordinates must be in the drawing area
+ * (between 0 and 1 and by default) or the points and lines will not be visible.
  * <p>
  * <b>Squares, circles, rectangles, and ellipses.</b>
- * You can draw squares, circles, rectangles, and ellipses using the following methods:
+ * You can draw squares, circles, rectangles, and ellipses using the following
+ * methods:
  * <ul>
  * <li> {@link #circle(double x, double y, double radius)}
- * <li> {@link #ellipse(double x, double y, double semiMajorAxis, double semiMinorAxis)}
+ * <li>
+ * {@link #ellipse(double x, double y, double semiMajorAxis, double semiMinorAxis)}
  * <li> {@link #square(double x, double y, double radius)}
- * <li> {@link #rectangle(double x, double y, double halfWidth, double halfHeight)}
+ * <li>
+ * {@link #rectangle(double x, double y, double halfWidth, double halfHeight)}
  * </ul>
  * <p>
- * All of these methods take as arguments the location and size of the shape. The location is always specified by the <em>x</em>- and
- * <em>y</em>-coordinates of its <em>center</em>. The size of a circle is specified by its radius and the size of an ellipse is specified by the lengths of its semi-major and semi-minor axes. The size of a square or rectangle is specified by its half-width or half-height. The convention for drawing squares and rectangles is parallel to those for drawing circles and ellipses, but may be unexpected to the uninitiated.
+ * All of these methods take as arguments the location and size of the shape.
+ * The location is always specified by the <em>x</em>- and
+ * <em>y</em>-coordinates of its <em>center</em>. The size of a circle is
+ * specified by its radius and the size of an ellipse is specified by the
+ * lengths of its semi-major and semi-minor axes. The size of a square or
+ * rectangle is specified by its half-width or half-height. The convention for
+ * drawing squares and rectangles is parallel to those for drawing circles and
+ * ellipses, but may be unexpected to the uninitiated.
  * <p>
- * The methods above trace outlines of the given shapes. The following methods draw filled versions:
+ * The methods above trace outlines of the given shapes. The following methods
+ * draw filled versions:
  * <ul>
  * <li> {@link #filledCircle(double x, double y, double radius)}
- * <li> {@link #filledEllipse(double x, double y, double semiMajorAxis, double semiMinorAxis)}
+ * <li>
+ * {@link #filledEllipse(double x, double y, double semiMajorAxis, double semiMinorAxis)}
  * <li> {@link #filledSquare(double x, double y, double radius)}
- * <li> {@link #filledRectangle(double x, double y, double halfWidth, double halfHeight)}
+ * <li>
+ * {@link #filledRectangle(double x, double y, double halfWidth, double halfHeight)}
  * </ul>
  * <p>
  * <b>Circular arcs.</b>
  * You can draw circular arcs with the following method:
  * <ul>
- * <li> {@link #arc(double x, double y, double radius, double angle1, double angle2)}
+ * <li>
+ * {@link #arc(double x, double y, double radius, double angle1, double angle2)}
  * </ul>
  * <p>
- * The arc is from the circle centered at (<em>x</em>, <em>y</em>) of the specified radius. The arc extends from angle1 to angle2. By convention, the angles are
- * <em>polar</em> (counterclockwise angle from the <em>x</em>-axis) and represented in degrees. For example, {@code StdDraw.arc(0.0, 0.0, 1.0, 0, 90)} draws the arc of the unit circle from 3 o'clock (0 degrees) to 12 o'clock (90 degrees).
+ * The arc is from the circle centered at (<em>x</em>, <em>y</em>) of the
+ * specified radius. The arc extends from angle1 to angle2. By convention, the
+ * angles are
+ * <em>polar</em> (counterclockwise angle from the <em>x</em>-axis) and
+ * represented in degrees. For example,
+ * {@code StdDraw.arc(0.0, 0.0, 1.0, 0, 90)} draws the arc of the unit circle
+ * from 3 o'clock (0 degrees) to 12 o'clock (90 degrees).
  * <p>
  * <b>Polygons.</b>
  * You can draw polygons with the following methods:
@@ -126,7 +165,9 @@ import javax.swing.KeyStroke;
  * <li> {@link #filledPolygon(double[] x, double[] y)}
  * </ul>
  * <p>
- * The points in the polygon are ({@code x[i]}, {@code y[i]}). For example, the following code fragment draws a filled diamond with vertices (0.1, 0.2), (0.2, 0.3), (0.3, 0.2), and (0.2, 0.1):
+ * The points in the polygon are ({@code x[i]}, {@code y[i]}). For example, the
+ * following code fragment draws a filled diamond with vertices (0.1, 0.2),
+ * (0.2, 0.3), (0.3, 0.2), and (0.2, 0.1):
  * <pre>
  *   double[] x = { 0.1, 0.2, 0.3, 0.2 };
  *   double[] y = { 0.2, 0.3, 0.2, 0.1 };
@@ -135,35 +176,61 @@ import javax.swing.KeyStroke;
  * <p>
  * <b>Pen size.</b>
  * The pen is circular, so that when you set the pen radius to <em>r</em>
- * and draw a point, you get a circle of radius <em>r</em>. Also, lines are of thickness 2<em>r</em> and have rounded ends. The default pen radius is 0.005 and is not affected by coordinate scaling. This default pen radius is about 1/200 the width of the default canvas, so that if you draw 100 points equally spaced along a horizontal or vertical line, you will be able to see individual circles, but if you draw 200 such points, the result will look like a line.
+ * and draw a point, you get a circle of radius <em>r</em>. Also, lines are of
+ * thickness 2<em>r</em> and have rounded ends. The default pen radius is 0.005
+ * and is not affected by coordinate scaling. This default pen radius is about
+ * 1/200 the width of the default canvas, so that if you draw 100 points equally
+ * spaced along a horizontal or vertical line, you will be able to see
+ * individual circles, but if you draw 200 such points, the result will look
+ * like a line.
  * <ul>
  * <li> {@link #setPenRadius(double radius)}
  * </ul>
  * <p>
- * For example, {@code StdDraw.setPenRadius(0.025)} makes the thickness of the lines and the size of the points to be five times the 0.005 default. To draw points with the minimum possible radius (one pixel on typical displays), set the pen radius to 0.0.
+ * For example, {@code StdDraw.setPenRadius(0.025)} makes the thickness of the
+ * lines and the size of the points to be five times the 0.005 default. To draw
+ * points with the minimum possible radius (one pixel on typical displays), set
+ * the pen radius to 0.0.
  * <p>
  * <b>Pen color.</b>
- * All geometric shapes (such as points, lines, and circles) are drawn using the current pen color. By default, it is black. You can change the pen color with the following methods:
+ * All geometric shapes (such as points, lines, and circles) are drawn using the
+ * current pen color. By default, it is black. You can change the pen color with
+ * the following methods:
  * <ul>
  * <li> {@link #setPenColor(int red, int green, int blue)}
  * <li> {@link #setPenColor(Color color)}
  * </ul>
  * <p>
- * The first method allows you to specify colors using the RGB color system. This <a href = "http://johndyer.name/lab/colorpicker/">color picker</a>
- * is a convenient way to find a desired color. The second method allows you to specify colors using the {@link Color} data type that is discussed in Chapter 3. Until then, you can use this method with one of these predefined colors in standard drawing: null {@link #BLACK}, {@link #BLUE}, {@link #CYAN}, {@link #DARK_GRAY}, {@link #GRAY},
+ * The first method allows you to specify colors using the RGB color system.
+ * This <a href = "http://johndyer.name/lab/colorpicker/">color picker</a>
+ * is a convenient way to find a desired color. The second method allows you to
+ * specify colors using the {@link Color} data type that is discussed in Chapter
+ * 3. Until then, you can use this method with one of these predefined colors in
+ * standard drawing: null {@link #BLACK}, {@link #BLUE}, {@link #CYAN}, {@link #DARK_GRAY}, {@link #GRAY},
  *  {@link #GREEN}, {@link #LIGHT_GRAY}, {@link #MAGENTA}, {@link #ORANGE},
- *  {@link #PINK}, {@link #RED}, {@link #WHITE}, and {@link #YELLOW}. For example, {@code StdDraw.setPenColor(StdDraw.MAGENTA)} sets the pen color to magenta.
+ *  {@link #PINK}, {@link #RED}, {@link #WHITE}, and {@link #YELLOW}. For
+ * example, {@code StdDraw.setPenColor(StdDraw.MAGENTA)} sets the pen color to
+ * magenta.
  * <p>
  * <b>Canvas size.</b>
- * By default, all drawing takes places in a 512-by-512 canvas. The canvas does not include the window title or window border. You can change the size of the canvas with the following method:
+ * By default, all drawing takes places in a 512-by-512 canvas. The canvas does
+ * not include the window title or window border. You can change the size of the
+ * canvas with the following method:
  * <ul>
  * <li> {@link #setCanvasSize(int width, int height)}
  * </ul>
  * <p>
- * This sets the canvas size to be <em>width</em>-by-<em>height</em> pixels. It also erases the current drawing and resets the coordinate system, pen radius, pen color, and font back to their default values. Ordinarly, this method is called once, at the very beginning of a program. For example, {@code StdDraw.setCanvasSize(800, 800)} sets the canvas size to be 800-by-800 pixels.
+ * This sets the canvas size to be <em>width</em>-by-<em>height</em> pixels. It
+ * also erases the current drawing and resets the coordinate system, pen radius,
+ * pen color, and font back to their default values. Ordinarly, this method is
+ * called once, at the very beginning of a program. For example,
+ * {@code StdDraw.setCanvasSize(800, 800)} sets the canvas size to be 800-by-800
+ * pixels.
  * <p>
  * <b>Canvas scale and coordinate system.</b>
- * By default, all drawing takes places in the unit square, with (0, 0) at lower left and (1, 1) at upper right. You can change the default coordinate system with the following methods:
+ * By default, all drawing takes places in the unit square, with (0, 0) at lower
+ * left and (1, 1) at upper right. You can change the default coordinate system
+ * with the following methods:
  * <ul>
  * <li> {@link #setXscale(double xmin, double xmax)}
  * <li> {@link #setYscale(double ymin, double ymax)}
@@ -171,9 +238,14 @@ import javax.swing.KeyStroke;
  * </ul>
  * <p>
  * The arguments are the coordinates of the minimum and maximum
- * <em>x</em>- or <em>y</em>-coordinates that will appear in the canvas. For example, if you wish to use the default coordinate system but leave a small margin, you can call {@code StdDraw.setScale(-.05, 1.05)}.
+ * <em>x</em>- or <em>y</em>-coordinates that will appear in the canvas. For
+ * example, if you wish to use the default coordinate system but leave a small
+ * margin, you can call {@code StdDraw.setScale(-.05, 1.05)}.
  * <p>
- * These methods change the coordinate system for subsequent drawing commands; they do not affect previous drawings. These methods do not change the canvas size; so, if the <em>x</em>- and <em>y</em>-scales are different, squares will become rectangles and circles will become ellipsoidal.
+ * These methods change the coordinate system for subsequent drawing commands;
+ * they do not affect previous drawings. These methods do not change the canvas
+ * size; so, if the <em>x</em>- and <em>y</em>-scales are different, squares
+ * will become rectangles and circles will become ellipsoidal.
  * <p>
  * <b>Text.</b>
  * You can use the following methods to annotate your drawings with text:
@@ -184,15 +256,20 @@ import javax.swing.KeyStroke;
  * <li> {@link #textRight(double x, double y, String text)}
  * </ul>
  * <p>
- * The first two methods write the specified text in the current font, centered at (<em>x</em>, <em>y</em>). The second method allows you to rotate the text. The last two methods either left- or right-align the text at (<em>x</em>,
+ * The first two methods write the specified text in the current font, centered
+ * at (<em>x</em>, <em>y</em>). The second method allows you to rotate the text.
+ * The last two methods either left- or right-align the text at (<em>x</em>,
  * <em>y</em>).
  * <p>
- * The default font is a Sans Serif font with point size 16. You can use the following method to change the font:
+ * The default font is a Sans Serif font with point size 16. You can use the
+ * following method to change the font:
  * <ul>
  * <li> {@link #setFont(Font font)}
  * </ul>
  * <p>
- * You use the {@link Font} data type to specify the font. This allows you to choose the face, size, and style of the font. For example, the following code fragment sets the font to Arial Bold, 60 point.
+ * You use the {@link Font} data type to specify the font. This allows you to
+ * choose the face, size, and style of the font. For example, the following code
+ * fragment sets the font to Arial Bold, 60 point.
  * <pre>
  *   Font font = new Font("Arial", Font.BOLD, 60);
  *   StdDraw.setFont(font);
@@ -205,18 +282,26 @@ import javax.swing.KeyStroke;
  * <li> {@link #picture(double x, double y, String filename)}
  * <li> {@link #picture(double x, double y, String filename, double degrees)}
  * <li> {@link #picture(double x, double y, String filename, double width)}
- * <li> {@link #picture(double x, double y, String filename, double width, double degrees)}
+ * <li>
+ * {@link #picture(double x, double y, String filename, double width, double degrees)}
  * </ul>
  * <p>
- * These methods draw the specified image, centered at (<em>x</em>, <em>y</em>). The supported image formats are JPEG, PNG, and GIF. The image will display at its native size, independent of the coordinate system. Optionally, you can rotate the image a specified number of degrees counterclockwise or rescale it to fit inside a width-by-height pixel bounding box.
+ * These methods draw the specified image, centered at (<em>x</em>, <em>y</em>).
+ * The supported image formats are JPEG, PNG, and GIF. The image will display at
+ * its native size, independent of the coordinate system. Optionally, you can
+ * rotate the image a specified number of degrees counterclockwise or rescale it
+ * to fit inside a width-by-height pixel bounding box.
  * <p>
  * <b>Saving to a file.</b>
- * You save your image to a file using the <em>File -> Save</em> menu option. You can also save a file programatically using the following method:
+ * You save your image to a file using the <em>File -> Save</em> menu option.
+ * You can also save a file programatically using the following method:
  * <ul>
  * <li> {@link #save(String filename)}
  * </ul>
  * <p>
- * The supported image formats are JPEG and PNG. The filename must have either the extension .jpg or .png. We recommend using PNG for drawing that consist solely of geometric shapes and JPEG for drawings that contains pictures.
+ * The supported image formats are JPEG and PNG. The filename must have either
+ * the extension .jpg or .png. We recommend using PNG for drawing that consist
+ * solely of geometric shapes and JPEG for drawings that contains pictures.
  * <p>
  * <b>Clearing the canvas.</b>
  * To clear the entire drawing canvas, you can use the following methods:
@@ -225,77 +310,125 @@ import javax.swing.KeyStroke;
  * <li> {@link #clear(Color color)}
  * </ul>
  * <p>
- * The first method clears the canvas to white; the second method allows you to specify a color of your choice. For example, {@code StdDraw.clear(StdDraw.LIGHT_GRAY)} clears the canvas to a shade of gray. Most often, these two methods are used in conjunction with animation mode.
+ * The first method clears the canvas to white; the second method allows you to
+ * specify a color of your choice. For example,
+ * {@code StdDraw.clear(StdDraw.LIGHT_GRAY)} clears the canvas to a shade of
+ * gray. Most often, these two methods are used in conjunction with animation
+ * mode.
  * <p>
  * <b>Animations.</b>
- * Animation mode is one of the trickier features of standard drawing. The following two methods control the way in which objects are drawn:
+ * Animation mode is one of the trickier features of standard drawing. The
+ * following two methods control the way in which objects are drawn:
  * <ul>
  * <li> {@link #show()}
  * <li> {@link #show(int t)}
  * </ul>
  * <p>
- * By default, animation mode is off, which means that as soon as you call a drawing method&mdash;such as {@code point()} or {@code line()}&mdash;the results appear on the screen. {@code StdDraw.show()} turns off animation mode.
+ * By default, animation mode is off, which means that as soon as you call a
+ * drawing method&mdash;such as {@code point()} or {@code line()}&mdash;the
+ * results appear on the screen. {@code StdDraw.show()} turns off animation
+ * mode.
  * <p>
- * You can call {@link #show(int t)} to turn on animation mode. This defers all drawing to the screen until you are aready to display them. Once you are ready to display them, you call {@link #show(int t)} again, which transfer the offscreen drawing to the screen and waits for the specified number of milliseconds. In conjuction with {@link #clear()}, you can create the illusion of movement by iterating the following three steps:
+ * You can call {@link #show(int t)} to turn on animation mode. This defers all
+ * drawing to the screen until you are aready to display them. Once you are
+ * ready to display them, you call {@link #show(int t)} again, which transfer
+ * the offscreen drawing to the screen and waits for the specified number of
+ * milliseconds. In conjuction with {@link #clear()}, you can create the
+ * illusion of movement by iterating the following three steps:
  * <ul>
  * <li> Clear the background canvas.
  * <li> Draw geometric objects.
  * <li> Show the drawing and wait for a short while.
  * </ul>
  * <p>
- * Waiting for a short while is essential; otherwise, the drawing will appear and disappear so quickly that your animation will flicker.
+ * Waiting for a short while is essential; otherwise, the drawing will appear
+ * and disappear so quickly that your animation will flicker.
  * <p>
  * Here is a simple example of an animation:
  * <p>
  * <b>Keyboard and mouse inputs.</b>
- * Standard drawing has very basic support for keyboard and mouse input. It is much less powerful than most user interface libraries provide, but also much simpler. You can use the following methods to intercept mouse events:
+ * Standard drawing has very basic support for keyboard and mouse input. It is
+ * much less powerful than most user interface libraries provide, but also much
+ * simpler. You can use the following methods to intercept mouse events:
  * <ul>
  * <li> {@link #mousePressed()}
  * <li> {@link #mouseX()}
  * <li> {@link #mouseY()}
  * </ul>
  * <p>
- * The first method tells you whether a mouse button is currently being pressed. The last two methods tells you the <em>x</em>- and <em>y</em>-coordinates of the mouse's current position, using the same coordinate system as the canvas (the unit square, by default). You should use these methods in an animation loop that waits a short while before trying to poll the mouse for its current state. You can use the following methods to intercept keyboard events:
+ * The first method tells you whether a mouse button is currently being pressed.
+ * The last two methods tells you the <em>x</em>- and <em>y</em>-coordinates of
+ * the mouse's current position, using the same coordinate system as the canvas
+ * (the unit square, by default). You should use these methods in an animation
+ * loop that waits a short while before trying to poll the mouse for its current
+ * state. You can use the following methods to intercept keyboard events:
  * <ul>
  * <li> {@link #hasNextKeyTyped()}
  * <li> {@link #nextKeyTyped()}
  * <li> {@link #isKeyPressed(int keycode)}
  * </ul>
  * <p>
- * If the user types lots of keys, they will be saved in a list until you process them. The first method tells you whether the user has typed a key (that your program has not yet processed). The second method returns the next key that the user typed (that your program has not yet processed) and removes it from the list of saved keystrokes. The third method tells you whether a key is currently being pressed.
+ * If the user types lots of keys, they will be saved in a list until you
+ * process them. The first method tells you whether the user has typed a key
+ * (that your program has not yet processed). The second method returns the next
+ * key that the user typed (that your program has not yet processed) and removes
+ * it from the list of saved keystrokes. The third method tells you whether a
+ * key is currently being pressed.
  * <p>
  * <b>Accessing control parameters.</b>
- * You can use the following methods to access the current pen color, pen radius, and font:
+ * You can use the following methods to access the current pen color, pen
+ * radius, and font:
  * <ul>
  * <li> {@link #getPenColor()}
  * <li> {@link #getPenRadius()}
  * <li> {@link #getFont()}
  * </ul>
  * <p>
- * These methods are useful when you want to temporarily change a control parameter and reset it back to its original value.
+ * These methods are useful when you want to temporarily change a control
+ * parameter and reset it back to its original value.
  * <p>
  * <b>Corner cases.</b>
- * To avoid clutter, the API doesn't explicitly refer to arguments that are null, infinity, or NaN.
+ * To avoid clutter, the API doesn't explicitly refer to arguments that are
+ * null, infinity, or NaN.
  * <ul>
- * <li> Any method that is passed a {@code null} argument will throw a {@link NullPointerException}.
- * <li> Except as noted in the APIs, drawing an object outside (or partly outside) the canvas is permitted&mdash;however, only the part of the object that appears inside the canvas will be visible.
+ * <li> Any method that is passed a {@code null} argument will throw a
+ * {@link NullPointerException}.
+ * <li> Except as noted in the APIs, drawing an object outside (or partly
+ * outside) the canvas is permitted&mdash;however, only the part of the object
+ * that appears inside the canvas will be visible.
  * <li> Except as noted in the APIs, all methods accept {@link Double#NaN},
- *       {@link Double#POSITIVE_INFINITY}, and {@link Double#NEGATIVE_INFINITY} as arugments. An object drawn with an <em>x</em>- or <em>y</em>-coordinate that is NaN will behave as if it is outside the canvas, and will not be visible.
+ *       {@link Double#POSITIVE_INFINITY}, and {@link Double#NEGATIVE_INFINITY} as
+ * arugments. An object drawn with an <em>x</em>- or <em>y</em>-coordinate that
+ * is NaN will behave as if it is outside the canvas, and will not be visible.
  * </ul>
  * <p>
  * <b>Performance tricks.</b>
- * Standard drawing is capable of drawing large amounts of data. Here are a few tricks and tips:
+ * Standard drawing is capable of drawing large amounts of data. Here are a few
+ * tricks and tips:
  * <ul>
- * <li> Use <em>animation mode</em> for static drawing with a large number of objects. That is, call {@code StdDraw.show(0)} before and after the sequence of drawing commands. The bottleneck operation is not drawing the geometric shapes but rather drawing them to the screen. By using animation mode, you draw all of the shapes to an offscreen buffer, then copy them all at once to the screen.
- * <li> When using <em>animation mode</em>, call {@code show()} only once per frame, not after drawing each object.
- * <li> If you call {@code picture()} multiple times with the same filename, Java will cache the image, so you do not incur the cost of reading from a file each time.
- * <li> Do not call {@code setFont()} in an animation loop (unless you really need to change the font in each iteration). It can cause flicker.
+ * <li> Use <em>animation mode</em> for static drawing with a large number of
+ * objects. That is, call {@code StdDraw.show(0)} before and after the sequence
+ * of drawing commands. The bottleneck operation is not drawing the geometric
+ * shapes but rather drawing them to the screen. By using animation mode, you
+ * draw all of the shapes to an offscreen buffer, then copy them all at once to
+ * the screen.
+ * <li> When using <em>animation mode</em>, call {@code show()} only once per
+ * frame, not after drawing each object.
+ * <li> If you call {@code picture()} multiple times with the same filename,
+ * Java will cache the image, so you do not incur the cost of reading from a
+ * file each time.
+ * <li> Do not call {@code setFont()} in an animation loop (unless you really
+ * need to change the font in each iteration). It can cause flicker.
  * </ul>
  * <p>
  * <b>Known bugs and issues.</b>
  * <ul>
- * <li> The {@code picture()} methods may not draw the portion of the image that is inside the canvas if the center point (<em>x</em>, <em>y</em>) is outside the canvas. This bug appears only on some systems.
- * <li> Some methods may not draw the portion of the geometric object that is inside the canvas if the <em>x</em>- or <em>y</em>-coordinates are infinite. This bug appears only on some systems.
+ * <li> The {@code picture()} methods may not draw the portion of the image that
+ * is inside the canvas if the center point (<em>x</em>, <em>y</em>) is outside
+ * the canvas. This bug appears only on some systems.
+ * <li> Some methods may not draw the portion of the geometric object that is
+ * inside the canvas if the <em>x</em>- or <em>y</em>-coordinates are infinite.
+ * This bug appears only on some systems.
  * </ul>
  * <p>
  * <b>Reference.</b>
@@ -375,17 +508,20 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	public static final Color YELLOW = Color.YELLOW;
 
 	/**
-	 * Shade of blue used in <em>Introduction to Programming in Java</em>. It is Pantone 300U. The RGB values are approximately (9, 90, 166).
+	 * Shade of blue used in <em>Introduction to Programming in Java</em>. It is
+	 * Pantone 300U. The RGB values are approximately (9, 90, 166).
 	 */
 	public static final Color BOOK_BLUE = new Color(9, 90, 166);
 
 	/**
-	 * Shade of light blue used in <em>Introduction to Programming in Java</em>. The RGB values are approximately (103, 198, 243).
+	 * Shade of light blue used in <em>Introduction to Programming in Java</em>.
+	 * The RGB values are approximately (103, 198, 243).
 	 */
 	public static final Color BOOK_LIGHT_BLUE = new Color(103, 198, 243);
 
 	/**
-	 * Shade of red used in <em>Algorithms, 4th edition</em>. It is Pantone 1805U. The RGB values are approximately (150, 35, 31).
+	 * Shade of red used in <em>Algorithms, 4th edition</em>. It is Pantone
+	 * 1805U. The RGB values are approximately (150, 35, 31).
 	 */
 	public static final Color BOOK_RED = new Color(150, 35, 31);
 
@@ -464,7 +600,10 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Sets the canvas (drawing area) to be 512-by-512 pixels. This also erases the current drawing and resets the coordinate system, pen radius, pen color, and font back to their default values. Ordinarly, this method is called once, at the very beginning of a program.
+	 * Sets the canvas (drawing area) to be 512-by-512 pixels. This also erases
+	 * the current drawing and resets the coordinate system, pen radius, pen
+	 * color, and font back to their default values. Ordinarly, this method is
+	 * called once, at the very beginning of a program.
 	 */
 	public static void setCanvasSize() {
 		setCanvasSize(DEFAULT_SIZE, DEFAULT_SIZE);
@@ -472,11 +611,15 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 	/**
 	 * Sets the canvas (drawing area) to be <em>width</em>-by-<em>height</em>
-	 * pixels. This also erases the current drawing and resets the coordinate system, pen radius, pen color, and font back to their default values. Ordinarly, this method is called once, at the very beginning of a program.
+	 * pixels. This also erases the current drawing and resets the coordinate
+	 * system, pen radius, pen color, and font back to their default values.
+	 * Ordinarly, this method is called once, at the very beginning of a
+	 * program.
 	 *
 	 * @param canvasWidth the width as a number of pixels
 	 * @param canvasHeight the height as a number of pixels
-	 * @throws IllegalArgumentException unless both {@code width} and {@code height} are positive
+	 * @throws IllegalArgumentException unless both {@code width} and
+	 * {@code height} are positive
 	 */
 	public static void setCanvasSize(int canvasWidth, int canvasHeight) {
 		if (width <= 0 || height <= 0) {
@@ -546,7 +689,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 	/**
 	 * *************************************************************************
-	 * User and screen coordinate systems. *************************************************************************
+	 * User and screen coordinate systems.
+	 * *************************************************************************
 	 */
 	/**
 	 * Sets the <em>x</em>-scale to be the default (between 0.0 and 1.0).
@@ -563,7 +707,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Sets the <em>x</em>-scale and <em>y</em>-scale to be the default (between 0.0 and 1.0).
+	 * Sets the <em>x</em>-scale and <em>y</em>-scale to be the default (between
+	 * 0.0 and 1.0).
 	 */
 	public static void setScale() {
 		setXscale();
@@ -607,7 +752,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Sets both the <em>x</em>-scale and <em>y</em>-scale to the (same) specified range.
+	 * Sets both the <em>x</em>-scale and <em>y</em>-scale to the (same)
+	 * specified range.
 	 *
 	 * @param min the minimum value of the <em>x</em>- and <em>y</em>-scales
 	 * @param max the maximum value of the <em>x</em>- and <em>y</em>-scales
@@ -680,14 +826,20 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Sets the pen size to the default size (0.002). The pen is circular, so that lines have rounded ends, and when you set the pen radius and draw a point, you get a circle of the specified radius. The pen radius is not affected by coordinate scaling.
+	 * Sets the pen size to the default size (0.002). The pen is circular, so
+	 * that lines have rounded ends, and when you set the pen radius and draw a
+	 * point, you get a circle of the specified radius. The pen radius is not
+	 * affected by coordinate scaling.
 	 */
 	public static void setPenRadius() {
 		setPenRadius(DEFAULT_PEN_RADIUS);
 	}
 
 	/**
-	 * Sets the radius of the pen to the specified size. The pen is circular, so that lines have rounded ends, and when you set the pen radius and draw a point, you get a circle of the specified radius. The pen radius is not affected by coordinate scaling.
+	 * Sets the radius of the pen to the specified size. The pen is circular, so
+	 * that lines have rounded ends, and when you set the pen radius and draw a
+	 * point, you get a circle of the specified radius. The pen radius is not
+	 * affected by coordinate scaling.
 	 *
 	 * @param radius the radius of the pen
 	 * @throws IllegalArgumentException if {@code radius} is negative
@@ -747,7 +899,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	 * @param red the amount of red (between 0 and 255)
 	 * @param green the amount of green (between 0 and 255)
 	 * @param blue the amount of blue (between 0 and 255)
-	 * @throws IllegalArgumentException if {@code red}, {@code green}, or {@code blue} is outside its prescribed range
+	 * @throws IllegalArgumentException if {@code red}, {@code green}, or
+	 * {@code blue} is outside its prescribed range
 	 */
 	public static void setPenColor(int red, int green, int blue) {
 		if (red < 0 || red >= 256) {
@@ -792,7 +945,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 	/**
 	 * *************************************************************************
-	 * Drawing geometric shapes. *************************************************************************
+	 * Drawing geometric shapes.
+	 * *************************************************************************
 	 */
 	/**
 	 * Draws a line segment between (<em>x</em><sub>0</sub>,
@@ -810,7 +964,9 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Draws one pixel at (<em>x</em>, <em>y</em>). This method is private because pixels depend on the display. To achieve the same effect, set the pen radius to 0 and call {@code point()}.
+	 * Draws one pixel at (<em>x</em>, <em>y</em>). This method is private
+	 * because pixels depend on the display. To achieve the same effect, set the
+	 * pen radius to 0 and call {@code point()}.
 	 *
 	 * @param x the <em>x</em>-coordinate of the pixel
 	 * @param y the <em>y</em>-coordinate of the pixel
@@ -820,7 +976,9 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Draws a point centered at (<em>x</em>, <em>y</em>). The point is a filled circle whose radius is equal to the pen radius. To draw a single-pixel point, first set the pen radius to 0.
+	 * Draws a point centered at (<em>x</em>, <em>y</em>). The point is a filled
+	 * circle whose radius is equal to the pen radius. To draw a single-pixel
+	 * point, first set the pen radius to 0.
 	 *
 	 * @param x the <em>x</em>-coordinate of the point
 	 * @param y the <em>y</em>-coordinate of the point
@@ -894,13 +1052,15 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Draws an ellipse with the specified semimajor and semiminor axes, centered at (<em>x</em>, <em>y</em>).
+	 * Draws an ellipse with the specified semimajor and semiminor axes,
+	 * centered at (<em>x</em>, <em>y</em>).
 	 *
 	 * @param x the <em>x</em>-coordinate of the center of the ellipse
 	 * @param y the <em>y</em>-coordinate of the center of the ellipse
 	 * @param semiMajorAxis is the semimajor axis of the ellipse
 	 * @param semiMinorAxis is the semiminor axis of the ellipse
-	 * @throws IllegalArgumentException if either {@code semiMajorAxis} or {@code semiMinorAxis} is negative
+	 * @throws IllegalArgumentException if either {@code semiMajorAxis} or
+	 * {@code semiMinorAxis} is negative
 	 */
 	public static void ellipse(double x, double y, double semiMajorAxis, double semiMinorAxis) {
 		if (!(semiMajorAxis >= 0)) {
@@ -922,13 +1082,15 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Draws an ellipse with the specified semimajor and semiminor axes, centered at (<em>x</em>, <em>y</em>).
+	 * Draws an ellipse with the specified semimajor and semiminor axes,
+	 * centered at (<em>x</em>, <em>y</em>).
 	 *
 	 * @param x the <em>x</em>-coordinate of the center of the ellipse
 	 * @param y the <em>y</em>-coordinate of the center of the ellipse
 	 * @param semiMajorAxis is the semimajor axis of the ellipse
 	 * @param semiMinorAxis is the semiminor axis of the ellipse
-	 * @throws IllegalArgumentException if either {@code semiMajorAxis} or {@code semiMinorAxis} is negative
+	 * @throws IllegalArgumentException if either {@code semiMajorAxis} or
+	 * {@code semiMinorAxis} is negative
 	 */
 	public static void filledEllipse(double x, double y, double semiMajorAxis, double semiMinorAxis) {
 		if (!(semiMajorAxis >= 0)) {
@@ -956,8 +1118,10 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	 * @param x the <em>x</em>-coordinate of the center of the circle
 	 * @param y the <em>y</em>-coordinate of the center of the circle
 	 * @param radius the radius of the circle
-	 * @param angle1 the starting angle. 0 would mean an arc beginning at 3 o'clock.
-	 * @param angle2 the angle at the end of the arc. For example, if you want a 90 degree arc, then angle2 should be angle1 + 90.
+	 * @param angle1 the starting angle. 0 would mean an arc beginning at 3
+	 * o'clock.
+	 * @param angle2 the angle at the end of the arc. For example, if you want a
+	 * 90 degree arc, then angle2 should be angle1 + 90.
 	 * @throws IllegalArgumentException if {@code radius} is negative
 	 */
 	public static void arc(double x, double y, double radius, double angle1, double angle2) {
@@ -1036,7 +1200,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	 * @param y the <em>y</em>-coordinate of the center of the rectangle
 	 * @param halfWidth one half the width of the rectangle
 	 * @param halfHeight one half the height of the rectangle
-	 * @throws IllegalArgumentException if either {@code halfWidth} or {@code halfHeight} is negative
+	 * @throws IllegalArgumentException if either {@code halfWidth} or
+	 * {@code halfHeight} is negative
 	 */
 	public static void rectangle(double x, double y, double halfWidth, double halfHeight) {
 		if (!(halfWidth >= 0)) {
@@ -1065,7 +1230,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	 * @param y the <em>y</em>-coordinate of the center of the rectangle
 	 * @param halfWidth one half the width of the rectangle
 	 * @param halfHeight one half the height of the rectangle
-	 * @throws IllegalArgumentException if either {@code halfWidth} or {@code halfHeight} is negative
+	 * @throws IllegalArgumentException if either {@code halfWidth} or
+	 * {@code halfHeight} is negative
 	 */
 	public static void filledRectangle(double x, double y, double halfWidth, double halfHeight) {
 		if (!(halfWidth >= 0)) {
@@ -1094,7 +1260,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	 *
 	 * @param x an array of all the <em>x</em>-coordinates of the polygon
 	 * @param y an array of all the <em>y</em>-coordinates of the polygon
-	 * @throws IllegalArgumentException unless {@code x[]} and {@code y[]} are of the same length
+	 * @throws IllegalArgumentException unless {@code x[]} and {@code y[]} are
+	 * of the same length
 	 */
 	public static void polygon(double[] x, double[] y) {
 		if (x == null) {
@@ -1127,7 +1294,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	 *
 	 * @param x an array of all the <em>x</em>-coordinates of the polygon
 	 * @param y an array of all the <em>y</em>-coordinates of the polygon
-	 * @throws IllegalArgumentException unless {@code x[]} and {@code y[]} are of the same length
+	 * @throws IllegalArgumentException unless {@code x[]} and {@code y[]} are
+	 * of the same length
 	 */
 	public static void filledPolygon(double[] x, double[] y) {
 		if (x == null) {
@@ -1154,7 +1322,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 	/**
 	 * *************************************************************************
-	 * Drawing images. *************************************************************************
+	 * Drawing images.
+	 * *************************************************************************
 	 */
 	// get an image from the given filename
 	private static Image getImage(String filename) {
@@ -1196,7 +1365,12 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Draws the specified image centered at (<em>x</em>, <em>y</em>). The supported image formats are JPEG, PNG, and GIF. As an optimization, the picture is cached, so there is no performance penalty for redrawing the same image multiple times (e.g., in an animation). However, if you change the picture file after drawing it, subsequent calls will draw the original picture.
+	 * Draws the specified image centered at (<em>x</em>, <em>y</em>). The
+	 * supported image formats are JPEG, PNG, and GIF. As an optimization, the
+	 * picture is cached, so there is no performance penalty for redrawing the
+	 * same image multiple times (e.g., in an animation). However, if you change
+	 * the picture file after drawing it, subsequent calls will draw the
+	 * original picture.
 	 *
 	 * @param x the center <em>x</em>-coordinate of the image
 	 * @param y the center <em>y</em>-coordinate of the image
@@ -1218,7 +1392,9 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Draws the specified image centered at (<em>x</em>, <em>y</em>), rotated given number of degrees. The supported image formats are JPEG, PNG, and GIF.
+	 * Draws the specified image centered at (<em>x</em>, <em>y</em>), rotated
+	 * given number of degrees. The supported image formats are JPEG, PNG, and
+	 * GIF.
 	 *
 	 * @param x the center <em>x</em>-coordinate of the image
 	 * @param y the center <em>y</em>-coordinate of the image
@@ -1244,14 +1420,17 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Draws the specified image centered at (<em>x</em>, <em>y</em>), rescaled to the specified bounding box. The supported image formats are JPEG, PNG, and GIF.
+	 * Draws the specified image centered at (<em>x</em>, <em>y</em>), rescaled
+	 * to the specified bounding box. The supported image formats are JPEG, PNG,
+	 * and GIF.
 	 *
 	 * @param x the center <em>x</em>-coordinate of the image
 	 * @param y the center <em>y</em>-coordinate of the image
 	 * @param filename the name of the image/picture, e.g., "ball.gif"
 	 * @param scaledWidth the width of the scaled image in pixels
 	 * @param scaledHeight the height of the scaled image in pixels
-	 * @throws IllegalArgumentException if either {@code scaledWidth} or {@code scaledHeight} is negative
+	 * @throws IllegalArgumentException if either {@code scaledWidth} or
+	 * {@code scaledHeight} is negative
 	 * @throws IllegalArgumentException if the image filename is invalid
 	 */
 	public static void picture(double x, double y, String filename, double scaledWidth, double scaledHeight) {
@@ -1281,7 +1460,9 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Draws the specified image centered at (<em>x</em>, <em>y</em>), rotated given number of degrees, and rescaled to the specified bounding box. The supported image formats are JPEG, PNG, and GIF.
+	 * Draws the specified image centered at (<em>x</em>, <em>y</em>), rotated
+	 * given number of degrees, and rescaled to the specified bounding box. The
+	 * supported image formats are JPEG, PNG, and GIF.
 	 *
 	 * @param x the center <em>x</em>-coordinate of the image
 	 * @param y the center <em>y</em>-coordinate of the image
@@ -1289,7 +1470,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	 * @param scaledWidth the width of the scaled image in pixels
 	 * @param scaledHeight the height of the scaled image in pixels
 	 * @param degrees is the number of degrees to rotate counterclockwise
-	 * @throws IllegalArgumentException if either {@code scaledWidth} or {@code scaledHeight} is negative
+	 * @throws IllegalArgumentException if either {@code scaledWidth} or
+	 * {@code scaledHeight} is negative
 	 * @throws IllegalArgumentException if the image filename is invalid
 	 */
 	public static void picture(double x, double y, String filename, double scaledWidth, double scaledHeight, double degrees) {
@@ -1323,7 +1505,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 	/**
 	 * *************************************************************************
-	 * Drawing text. *************************************************************************
+	 * Drawing text.
+	 * *************************************************************************
 	 */
 	/**
 	 * Write the given text string in the current font, centered at (<em>x</em>,
@@ -1368,7 +1551,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Write the given text string in the current font, left-aligned at (<em>x</em>, <em>y</em>).
+	 * Write the given text string in the current font, left-aligned at
+	 * (<em>x</em>, <em>y</em>).
 	 *
 	 * @param x the <em>x</em>-coordinate of the text
 	 * @param y the <em>y</em>-coordinate of the text
@@ -1388,7 +1572,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Write the given text string in the current font, right-aligned at (<em>x</em>, <em>y</em>).
+	 * Write the given text string in the current font, right-aligned at
+	 * (<em>x</em>, <em>y</em>).
 	 *
 	 * @param x the <em>x</em>-coordinate of the text
 	 * @param y the <em>y</em>-coordinate of the text
@@ -1410,7 +1595,14 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 	/**
 	 * Display on screen, pause for t milliseconds, and turn on
-	 * <em>animation mode</em>: subsequent calls to drawing methods such as {@code line()}, {@code circle()}, and {@code square()} will not be displayed on screen until the next call to {@code show()}. This is useful for producing animations (clear the screen, draw a bunch of shapes, display on screen for a fixed amount of time, and repeat). It also speeds up drawing a huge number of shapes (call {@code show(0)} to defer drawing on screen, draw the shapes, and call {@code show(0)} to display them all on screen at once).
+	 * <em>animation mode</em>: subsequent calls to drawing methods such as
+	 * {@code line()}, {@code circle()}, and {@code square()} will not be
+	 * displayed on screen until the next call to {@code show()}. This is useful
+	 * for producing animations (clear the screen, draw a bunch of shapes,
+	 * display on screen for a fixed amount of time, and repeat). It also speeds
+	 * up drawing a huge number of shapes (call {@code show(0)} to defer drawing
+	 * on screen, draw the shapes, and call {@code show(0)} to display them all
+	 * on screen at once).
 	 *
 	 * @param t number of milliseconds
 	 */
@@ -1435,7 +1627,10 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Display on-screen and turn off animation mode: subsequent calls to drawing methods such as {@code line()}, {@code circle()}, and {@code square()} will be displayed on screen when called. This is the default.
+	 * Display on-screen and turn off animation mode: subsequent calls to
+	 * drawing methods such as {@code line()}, {@code circle()}, and
+	 * {@code square()} will be displayed on screen when called. This is the
+	 * default.
 	 */
 	public static void show() {
 		defer = false;
@@ -1454,10 +1649,12 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 	/**
 	 * *************************************************************************
-	 * Save drawing to a file. *************************************************************************
+	 * Save drawing to a file.
+	 * *************************************************************************
 	 */
 	/**
-	 * Saves the drawing to using the specified filename. The supported image formats are JPEG and PNG; the filename suffix must be <tt>.jpg</tt> or
+	 * Saves the drawing to using the specified filename. The supported image
+	 * formats are JPEG and PNG; the filename suffix must be <tt>.jpg</tt> or
 	 * <tt>.png</tt>.
 	 *
 	 * @param filename the name of the file with one of the required suffixes
@@ -1517,7 +1714,8 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 	/**
 	 * *************************************************************************
-	 * Mouse interactions. *************************************************************************
+	 * Mouse interactions.
+	 * *************************************************************************
 	 */
 	/**
 	 * Returns true if the mouse is being pressed.
@@ -1634,12 +1832,15 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 
 	/**
 	 * *************************************************************************
-	 * Keyboard interactions. *************************************************************************
+	 * Keyboard interactions.
+	 * *************************************************************************
 	 */
 	/**
-	 * Returns true if the user has typed a key (that has not yet been processed).
+	 * Returns true if the user has typed a key (that has not yet been
+	 * processed).
 	 *
-	 * @return <tt>true</tt> if the user has typed a key (that has not yet been processed by {@link #nextKeyTyped()}; <tt>false</tt> otherwise
+	 * @return <tt>true</tt> if the user has typed a key (that has not yet been
+	 * processed by {@link #nextKeyTyped()}; <tt>false</tt> otherwise
 	 */
 	public static boolean hasNextKeyTyped() {
 		synchronized (KEY_LOCK) {
@@ -1648,9 +1849,15 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	}
 
 	/**
-	 * Returns the next key that was typed by the user (that your program has not already processed). This method should be preceded by a call to {@link #hasNextKeyTyped()} to ensure that there is a next key to process. This method returns a Unicode character corresponding to the key typed (such as {@code 'a'} or {@code 'A'}). It cannot identify action keys (such as F1 and arrow keys) or modifier keys (such as control).
+	 * Returns the next key that was typed by the user (that your program has
+	 * not already processed). This method should be preceded by a call to
+	 * {@link #hasNextKeyTyped()} to ensure that there is a next key to process.
+	 * This method returns a Unicode character corresponding to the key typed
+	 * (such as {@code 'a'} or {@code 'A'}). It cannot identify action keys
+	 * (such as F1 and arrow keys) or modifier keys (such as control).
 	 *
-	 * @return the next key typed by the user (that your program has not already processed).
+	 * @return the next key typed by the user (that your program has not already
+	 * processed).
 	 * @throws NoSuchElementException if there is no remaining key
 	 */
 	public static char nextKeyTyped() {
@@ -1665,7 +1872,10 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 	/**
 	 * Returns true if the given key is being pressed.
 	 * <p>
-	 * This method takes the keycode (corresponding to a physical key) as an argument. It can handle action keys (such as F1 and arrow keys) and modifier keys (such as shift and control). See {@link KeyEvent} for a description of key codes.
+	 * This method takes the keycode (corresponding to a physical key) as an
+	 * argument. It can handle action keys (such as F1 and arrow keys) and
+	 * modifier keys (such as shift and control). See {@link KeyEvent} for a
+	 * description of key codes.
 	 *
 	 * @param keycode the key to check if it is being pressed
 	 * @return <tt>true</tt> if {@code keycode} is currently being pressed;
